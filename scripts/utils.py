@@ -27,7 +27,7 @@ def generate_desc_csv(root_folder):
     for category in tqdm(os.listdir(root_folder)):
         images = glob(os.path.join(root_folder, category)+'/*')
         for img in images:
-            file_id.append(img)
+            file_id.append(img.replace("\\", "/"))  # 契合linux平台
             label.append(name2label[category])
 
     df_desc = pd.DataFrame({'file_id': file_id, 'label': label})
