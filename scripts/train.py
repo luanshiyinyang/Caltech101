@@ -18,18 +18,18 @@ def train(epochs):
     for model in models:
         # 创建回调
         es = tf.keras.callbacks.EarlyStopping(
-            monitor='val_accuracy',
+            monitor='loss',
             min_delta=0.001,
             patience=5
         )
         lr = tf.keras.callbacks.ReduceLROnPlateau(
-            monitor='val_loss',
+            monitor='loss',
             factor=0.2,
             patience=5,
             min_lr=1e-5)
         # 编译模型
         model.compile(optimizer=tf.optimizers.Adam(lr=1e-3),
-                      loss=tf.keras.losses.CategoricalCrossentropy(from_logits=True),
+                      loss=tf.keras.losses.CategoricalCrossentropy(from_logits=False),  # 已经设置了softmax则不需要概率化
                       metrics=['accuracy'])
         db_train, db_test = load_data("../data/desc.csv", 32)
         his.append(model.fit(db_train, validation_data=db_test, validation_freq=1, epochs=epochs, callbacks=[es, lr]))

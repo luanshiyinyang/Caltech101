@@ -19,7 +19,7 @@ def preprocess(x, y):
     :return:
     """
     x = tf.io.read_file(x)
-    x = tf.image.decode_jpeg(x, channels=3)
+    x = tf.io.decode_image(x, channels=3)
     x = tf.image.resize(x, [224, 224])
 
     x = tf.image.random_flip_left_right(x)
