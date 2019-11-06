@@ -34,10 +34,10 @@ def train(epochs):
                       loss=tf.keras.losses.CategoricalCrossentropy(from_logits=False),  # 已经设置了softmax则不需要概率化
                       metrics=['accuracy'])
         db_train, db_test = load_data("../data/desc.csv", 32)
-        his.append(model.fit(db_train, validation_data=db_test, validation_freq=1, epochs=epochs, callbacks=[es, lr]))
+        his.append(model.fit(db_train, validation_data=db_test, validation_freq=1, epochs=epochs, callbacks=[lr]))
     return his
 
 
 if __name__ == '__main__':
-    training_history = train(100)
+    training_history = train(3)
     plot_history(training_history)
