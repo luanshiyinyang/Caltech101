@@ -39,5 +39,5 @@ def train(epochs):
 
 
 if __name__ == '__main__':
-    training_history = train(3)
+    training_history = train(50)
     plot_history(training_history)

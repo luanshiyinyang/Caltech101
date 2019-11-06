@@ -32,7 +32,7 @@ def resnet50(input_shape, num_classes):
     :param num_classes:
     :return:
     """
-    net = tf.keras.applications.ResNet50(weights='imagenet', include_top=False, pooling='max')
+    net = tf.keras.applications.ResNet50V2(weights='imagenet', include_top=False, pooling='max')
     net.trainable = False  # 关闭预训练网络的参数训练
     resnet = tf.keras.Sequential([
         net,
