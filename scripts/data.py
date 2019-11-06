@@ -4,7 +4,6 @@ Date: 2019/11/4
 Desc: 数据加载模块
 """
 import tensorflow as tf
-from tensorflow import keras
 import pandas as pd
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # 不显示警告
@@ -18,6 +17,7 @@ def preprocess(x, y):
     :param y: 图片编码
     :return:
     """
+    print(str(x))
     x = tf.io.read_file(x)
     x = tf.image.decode_jpeg(x, channels=3)
     x = tf.image.resize(x, [224, 224])
@@ -35,13 +35,14 @@ def preprocess(x, y):
 def load_data(desc_path, batch_size):
     """
     加载csv文件读入数据集
-    :param desc_path:
+    :param desc_path: 描述文件的路径
+    :param batch_size: 批尺寸大小
     :return:
     """
-    df_desc = pd.read_csv(desc_path)
+    df_desc = pd.read_csv(desc_path, encoding="utf8")
     sample_num = len(df_desc)  # 所有训练数据的样本数目
     images = df_desc['file_id']
-    labels = df_desc['label']
+    labels = df_desc['label'].astype('int')
     idx = tf.random.shuffle(tf.range(sample_num), seed=random_seed)
     # 按照8:2取训练集和验证集
     train_images, train_labels = tf.gather(images, idx[:int(images.shape[0] * 0.8)]), tf.gather(labels, idx[:int(labels.shape[0]*0.8)])

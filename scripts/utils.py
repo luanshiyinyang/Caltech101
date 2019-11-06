@@ -3,10 +3,6 @@ Author: Zhou Chen
 Date: 2019/11/4
 Desc: 工具库
 """
-import os
-from tqdm import tqdm
-import pandas as pd
-from glob import glob
 
 
 def generate_desc_csv(root_folder):
@@ -15,6 +11,10 @@ def generate_desc_csv(root_folder):
     :param root_folder:
     :return:
     """
+    import os
+    from tqdm import tqdm
+    import pandas as pd
+    from glob import glob
     # 字符编码为数值
     name2label = {}  # "sq...":0
     for name in sorted(os.listdir(os.path.join(root_folder))):
@@ -32,6 +32,32 @@ def generate_desc_csv(root_folder):
 
     df_desc = pd.DataFrame({'file_id': file_id, 'label': label})
     df_desc.to_csv("../data/desc.csv", encoding="utf8", index=False)
+
+
+def save_pickle(python_object, saved_path):
+    """
+    保存Python对象为pickle文件
+    :param python_object:
+    :param saved_path:
+    :return:
+    """
+    import pickle
+    output = open(saved_path, 'wb')
+    pickle.dump(python_object, output)
+    output.close()
+
+
+def load_pickle(file_path):
+    """
+    加载本地的pickle文件为Python对象
+    :param file_path:
+    :return:
+    """
+    import pickle
+    pkl_file = open(file_path, 'rb')
+    data = pickle.load(pkl_file)
+    pkl_file.close()
+    return data
 
 
 if __name__ == '__main__':

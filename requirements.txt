@@ -2,3 +2,4 @@ tensorflow-gpu==2.0.0
 tqdm
 pandas
 glob3
+matplotlib
