@@ -7,6 +7,7 @@ import tensorflow as tf
 from model import vgg16, resnet50, densenet121
 from data import load_data
 from utils import save_pickle
+from visualize import plot_history
 
 
 def train(epochs):
@@ -38,5 +39,5 @@ def train(epochs):
 
 
 if __name__ == '__main__':
-    training_history = train(1)
-    save_pickle(training_history, "../data/training_history.pkl")
+    training_history = train(100)
+    plot_history(training_history)

@@ -17,7 +17,6 @@ def preprocess(x, y):
     :param y: 图片编码
     :return:
     """
-    print(str(x))
     x = tf.io.read_file(x)
     x = tf.image.decode_jpeg(x, channels=3)
     x = tf.image.resize(x, [224, 224])
