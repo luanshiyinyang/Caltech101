@@ -4,7 +4,6 @@ Date: 2019/11/4
 Desc: 模型构建
 """
 import tensorflow as tf
-from data import load_data
 
 
 def vgg16(input_shape, num_classes):
