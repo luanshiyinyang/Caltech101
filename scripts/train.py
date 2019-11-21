@@ -26,9 +26,9 @@ def train(epochs):
     :return:
     """
 
-    vgg = vgg16((None, 224, 224, 3), 101)
-    resnet = resnet50((None, 224, 224, 3), 101)
-    densenet = densenet121((None, 224, 224, 3), 101)
+    vgg = vgg16((None, 224, 224, 3), 102)
+    resnet = resnet50((None, 224, 224, 3), 102)
+    densenet = densenet121((None, 224, 224, 3), 102)
     models = [vgg, resnet, densenet]
     train_db, valid_db = load_db(32)
     his = []

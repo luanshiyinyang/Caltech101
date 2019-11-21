@@ -16,7 +16,7 @@ def generate_desc_csv(root_folder):
     import pandas as pd
     from glob import glob
     # 字符编码为数值
-    name2label = {}  # "sq...":0
+    name2label = {}
     for name in sorted(os.listdir(os.path.join(root_folder))):
         if not os.path.isdir(os.path.join(root_folder, name)):
             continue
