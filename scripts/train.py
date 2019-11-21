@@ -41,6 +41,7 @@ def train(epochs):
             total_correct = 0
             training_loss = 0
             for step, (x, y) in enumerate(train_db):
+                print(y.shape)
                 with tf.GradientTape() as tape:
                     # train
                     out = model(x)

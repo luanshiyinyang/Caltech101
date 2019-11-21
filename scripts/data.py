@@ -26,7 +26,7 @@ def preprocess(x, y):
     # x: [0,255]=>[0,1]
     x = tf.cast(x, dtype=tf.float32) / 255.
     y = tf.convert_to_tensor(y)
-    y = tf.one_hot(y, depth=101)
+    y = tf.one_hot(y, depth=102)
 
     return x, y
 
