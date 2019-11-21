@@ -7,7 +7,7 @@ import tensorflow as tf
 from model import vgg16, resnet50, densenet121
 from data import load_data
 from visualize import plot_history
-
+print(tf.test.is_gpu_available())
 
 def load_db(batch_size):
     """
@@ -41,7 +41,6 @@ def train(epochs):
             total_correct = 0
             training_loss = 0
             for step, (x, y) in enumerate(train_db):
-                print(y.shape)
                 with tf.GradientTape() as tape:
                     # train
                     out = model(x)
@@ -52,10 +51,12 @@ def train(epochs):
                     optimizers.apply_gradients(zip(grads, variables))
                     # training accuracy
                     y_pred = tf.cast(tf.argmax(out, axis=1), dtype=tf.int32)
-                    y_true = tf.cast(tf.argmax(y, axia=1), dtype=tf.int32)
+                    y_true = tf.cast(tf.argmax(y, axis=1), dtype=tf.int32)
                     correct = tf.reduce_sum(tf.cast(tf.equal(y_pred, y_true), dtype=tf.int32))
                     total_num += x.shape[0]
                     total_correct += int(correct)
+                if step % 100 == 0:
+                    print("loss is {}".format(loss))
             training_accuracy = total_correct / total_num
 
             # validation
@@ -65,7 +66,7 @@ def train(epochs):
                 out = model(x)
                 y_pred = tf.argmax(out, axis=1)
                 y_pred = tf.cast(y_pred, dtype=tf.int32)
-                y_true = tf.argmax(y, axia=1)
+                y_true = tf.argmax(y, axis=1)
                 y_true = tf.cast(y_true, dtype=tf.int32)
                 correct = tf.cast(tf.equal(y_pred, y_true), dtype=tf.int32)
                 correct = tf.reduce_sum(correct)
