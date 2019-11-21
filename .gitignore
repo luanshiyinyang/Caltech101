@@ -3,3 +3,4 @@ __pycache__/
 *.zip
 *.rar
 Caltech101/
+*.h5
